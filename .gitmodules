@@ -1,0 +1,3 @@
+[submodule "todo-demo-app"]
+	path = todo-demo-app
+	url = git@github.com:ryanzhang/todo-demo-app.git
