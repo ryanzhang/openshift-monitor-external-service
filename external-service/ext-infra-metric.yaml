@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    external-service-monitor: "true"
+  name: ext-app-metric-todo-app
+  namespace: external-service
+spec:
+  ports:
+  - name: web
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodeport: 0
+  selector: {}
+  sessionAffinity: None
+  type: ClusterIP
+---
+kind: "Endpoints"
+apiVersion: "v1"
+metadata:
+  name: "ext-app-metric-todo-app" 
+subsets: 
+  - addresses:
+    - ip: "192.168.2.10" 
+    ports:
+      - port: 8080 
+        name: "web"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    external-infra-monitor: "true"
+  name: external-infra-monitor-nuc2
+  namespace: external-service
+spec:
+  ports:
+  - name: web
+    port: 9100
+    protocol: TCP
+    targetPort: 8080
+    nodeport: 0
+  selector: {}
+  sessionAffinity: None
+  type: ClusterIP
+---
+kind: "Endpoints"
+apiVersion: "v1"
+metadata:
+  name: "external-infra-monitor-nuc2" 
+subsets: 
+  - addresses:
+    - ip: "192.168.2.20" 
+    ports:
+      - port: 9100 
+        name: "web"
