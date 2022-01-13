@@ -4,7 +4,7 @@ kind: Service
 metadata:
   labels:
     external-infra-monitor: "true"
-  name: external-infra-monitor-nuc2
+  name: baremetal-p50
   namespace: external-service
 spec:
   ports:
@@ -20,10 +20,10 @@ spec:
 kind: "Endpoints"
 apiVersion: "v1"
 metadata:
-  name: "external-infra-monitor-nuc2" 
+  name: "baremetal-p50" 
 subsets: 
   - addresses:
-    - ip: "192.168.2.20" 
+    - ip: "192.168.2.50" 
     ports:
       - port: 9100 
         name: "web"
